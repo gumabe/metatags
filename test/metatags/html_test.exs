@@ -28,21 +28,21 @@ defmodule Metatags.HTMLTest do
       conn = Metatags.put(build_conn(), :keywords, ["metatags", "awesome"])
 
       assert safe_to_string(HTML.from_conn(conn)) =~
-               ~s(<meta content="metatags, awesome" name="keywords">)
+               ~s(<meta content="metatags, awesome" name="keywords" property="keywords">)
     end
 
     test "prints nested maps as keys with prefixes" do
       conn = Metatags.put(build_conn(), :prefix, %{key: "value"})
 
       assert safe_to_string(HTML.from_conn(conn)) =~
-               ~s(<meta content="value" name="prefix:key">)
+               ~s(<meta content="value" name="prefix:key" property="prefix:key">)
     end
 
     test "prints a key and value with name and content attributes" do
       conn = Metatags.put(build_conn(), :anything, "value")
 
       assert safe_to_string(HTML.from_conn(conn)) =~
-               ~s(<meta content="value" name="anything">)
+               ~s(<meta content="value" name="anything" property="anything">)
     end
 
     test "adds the sitename as suffix to title when configured" do

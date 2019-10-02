@@ -52,6 +52,6 @@ defmodule Metatags.HTML do
   end
 
   defp print_tag(_, key, value, _) do
-    Tag.tag(:meta, name: key, content: value)
+    Tag.tag(:meta, name: key, content: value, property: key)
   end
 end
